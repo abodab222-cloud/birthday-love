@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muthii 22 🖤</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:'Cairo', sans-serif;
+text-align:center;
+background:linear-gradient(135deg,#1a0000,#8b0000);
+color:white;
+overflow:hidden;
+}
+
+/* نجوم */
+.star{
+position:absolute;
+background:white;
+border-radius:50%;
+opacity:0.8;
+animation:twinkle 3s infinite alternate;
+}
+@keyframes twinkle{
+from{opacity:0.2;}
+to{opacity:1;}
+}
+
+.page{
+display:none;
+padding:40px;
+position:relative;
+z-index:2;
+}
+.active{
+display:block;
+animation:fadeIn 1.5s ease;
+}
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+button{
+padding:15px 35px;
+font-size:18px;
+border:none;
+border-radius:40px;
+background:#ff4d6d;
+color:white;
+cursor:pointer;
+margin-top:20px;
+transition:0.4s;
+box-shadow:0 0 15px rgba(255,77,109,0.6);
+display:block;
+margin-left:auto;
+margin-right:auto;
+}
+button:hover{
+transform:scale(1.1);
+box-shadow:0 0 25px rgba(255,77,109,1);
+}
+
+#message{
+font-size:20px;
+margin-top:30px;
+white-space:pre-line;
+line-height:2;
+max-width:750px;
+margin-left:auto;
+margin-right:auto;
+}
+
+/* قلوب */
+.heart{
+position:absolute;
+color:#ff99aa;
+font-size:20px;
+animation:float 6s linear infinite;
+}
+@keyframes float{
+0%{transform:translateY(100vh); opacity:1;}
+100%{transform:translateY(-10vh); opacity:0;}
+}
+</style>
+</head>
+<body>
+
+<!-- الصفحة 1 -->
+<div class="page active" id="page1">
+<h1>Welcome Muthii 22 🖤</h1>
+<p>في شي بسيط… لكنه من اعماق قلبي ✨</p>
+<button onclick="nextPage(2)">انطلق</button>
+</div>
+
+<!-- السؤال 1 -->
+<div class="page" id="page2">
+<h2>مين أكثر شخص يحبك؟ 😌</h2>
+<button onclick="nextPage(3)">أنا 🖤</button>
+<button onclick="nextPage(3)">أنا بدون نقاش</button>
+<button onclick="nextPage(3)">أكيد أنا 😎</button>
+</div>
+
+<!-- السؤال 2 -->
+<div class="page" id="page3">
+<h2>لو اختاروا لك هدية… ايش تختاري؟ 🎁</h2>
+<button onclick="nextPage(4)">ورد 🌹</button>
+<button onclick="nextPage(4)">سفر ✈️</button>
+<button onclick="nextPage(4)">أنا 😌🖤</button>
+</div>
+
+<!-- السؤال 3 -->
+<div class="page" id="page4">
+<h2>تتوقعي ايش ينتظرك الحين؟ ✨</h2>
+<button onclick="nextPage(5)">شي بسيط</button>
+<button onclick="nextPage(5)">مفاجأة</button>
+<button onclick="nextPage(5)">كلام من القلب 🖤</button>
+</div>
+
+<!-- زر النهاية -->
+<div class="page" id="page5">
+<button onclick="showFinal()">🎂 Happy Birthday 🎂</button>
+</div>
+
+<!-- الصفحة النهائية -->
+<div class="page" id="final">
+<h1>🎉 Muthii 22 🎉</h1>
+<div id="message"></div>
+</div>
+
+<script>
+function nextPage(num){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById('page'+num).classList.add('active');
+}
+
+function showFinal(){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById('final').classList.add('active');
+typeWriter();
+createHearts();
+}
+
+/* نص الرسالة */
+let text = `كل عام وانتي بخير وبصحه وسلامه والعمر كله 🤍
+
+اكملتي ٢٢ عام من عمرش...
+لكن لو بتسألي عمري كم؟
+بقولش: من لما حبيتش 🖤
+
+كل سنه وانتي احلا سنين يا زهره مارس،
+وأنتي الزهره الي تحلي البستان وتعطيه الجمال 🌹
+
+اتمنى لش سنه جميله ومليئه بالافراح،
+وصدقيني من جانبي راح اخليها احلا واحلا من كل السنين...
+
+العمر كله يارب ونكبر مع بعض،
+ونعيش احلا ايامنا واحتفل بكل سنينش ان شاء الله ✨
+
+احتفظي بهالشي البسيط،
+يمكن يوم من الايام بتجلسي تشوفيه وتفرحي،
+وتعرفي في انسان يحبش ويحاول يستغل مواهبه وجهده وعمله لصالحش 🤍
+
+كل عام وانتي بخير وبصحه وسلامه ياعمري،
+والعمر كله يارب يا سنيني 🖤`;
+
+let i=0;
+function typeWriter(){
+if(i<text.length){
+document.getElementById("message").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typeWriter,45);
+}
+}
+
+/* نجوم */
+for(let i=0;i<60;i++){
+let star=document.createElement("div");
+star.classList.add("star");
+star.style.width=Math.random()*3+"px";
+star.style.height=star.style.width;
+star.style.top=Math.random()*100+"vh";
+star.style.left=Math.random()*100+"vw";
+star.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(star);
+}
+
+/* قلوب */
+function createHearts(){
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="🖤";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+15)+"px";
+heart.style.animationDuration=(Math.random()*3+4)+"s";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),7000);
+},400);
+}
+</script>
+
+</body>
+</html>
