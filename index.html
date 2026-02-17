@@ -14,16 +14,17 @@ font-family:'Cairo', sans-serif;
 text-align:center;
 background:linear-gradient(135deg,#1a0000,#8b0000);
 color:white;
-overflow:hidden;
+overflow-x:hidden; /* نخلي التمرير عمودي فقط */
 }
 
 /* نجوم */
 .star{
-position:absolute;
+position:fixed;
 background:white;
 border-radius:50%;
 opacity:0.8;
 animation:twinkle 3s infinite alternate;
+z-index:0;
 }
 @keyframes twinkle{
 from{opacity:0.2;}
@@ -32,9 +33,10 @@ to{opacity:1;}
 
 .page{
 display:none;
-padding:40px;
+padding:40px 20px 120px;
 position:relative;
 z-index:2;
+min-height:100vh;
 }
 .active{
 display:block;
@@ -56,9 +58,6 @@ cursor:pointer;
 margin-top:20px;
 transition:0.4s;
 box-shadow:0 0 15px rgba(255,77,109,0.6);
-display:block;
-margin-left:auto;
-margin-right:auto;
 }
 button:hover{
 transform:scale(1.1);
@@ -71,24 +70,38 @@ margin-top:30px;
 white-space:pre-line;
 line-height:2;
 max-width:750px;
-margin-left:auto;
-margin-right:auto;
+margin:auto;
 }
 
 /* قلوب */
 .heart{
-position:absolute;
+position:fixed;
 color:#ff99aa;
 font-size:20px;
 animation:float 6s linear infinite;
+z-index:1;
 }
 @keyframes float{
 0%{transform:translateY(100vh); opacity:1;}
 100%{transform:translateY(-10vh); opacity:0;}
 }
+
+/* السنورين */
+.cats{
+position:fixed;
+bottom:10px;
+left:50%;
+transform:translateX(-50%);
+font-size:40px;
+z-index:3;
+opacity:0.9;
+}
 </style>
 </head>
 <body>
+
+<!-- السنورين -->
+<div class="cats">🐈‍⬛🖤🐈</div>
 
 <!-- الصفحة 1 -->
 <div class="page active" id="page1">
@@ -136,16 +149,18 @@ animation:float 6s linear infinite;
 function nextPage(num){
 document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
 document.getElementById('page'+num).classList.add('active');
+window.scrollTo(0,0);
 }
 
 function showFinal(){
 document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
 document.getElementById('final').classList.add('active');
+window.scrollTo(0,0);
 typeWriter();
 createHearts();
 }
 
-/* نص الرسالة */
+/* النص */
 let text = `كل عام وانتي بخير وبصحه وسلامه والعمر كله 🤍
 
 اكملتي ٢٢ عام من عمرش...
@@ -173,7 +188,7 @@ function typeWriter(){
 if(i<text.length){
 document.getElementById("message").innerHTML+=text.charAt(i);
 i++;
-setTimeout(typeWriter,45);
+setTimeout(typeWriter,40);
 }
 }
 
@@ -200,8 +215,12 @@ heart.style.fontSize=(Math.random()*20+15)+"px";
 heart.style.animationDuration=(Math.random()*3+4)+"s";
 document.body.appendChild(heart);
 setTimeout(()=>heart.remove(),7000);
-},400);
+},500);
 }
+</script>
+
+</body>
+</html>
 </script>
 
 </body>
