@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Muthii 22 🖤</title>
+<title>muthii 22 🖤</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 
@@ -12,39 +12,30 @@ body{
 margin:0;
 font-family:'Cairo', sans-serif;
 text-align:center;
-background:linear-gradient(135deg,#1a0000,#8b0000);
+background:linear-gradient(135deg,#000000,#3b0000,#8b0000);
 color:white;
-overflow-x:hidden; /* نخلي التمرير عمودي فقط */
-}
-
-/* نجوم */
-.star{
-position:fixed;
-background:white;
-border-radius:50%;
-opacity:0.8;
-animation:twinkle 3s infinite alternate;
-z-index:0;
-}
-@keyframes twinkle{
-from{opacity:0.2;}
-to{opacity:1;}
+overflow-x:hidden;
 }
 
 .page{
 display:none;
 padding:40px 20px 120px;
-position:relative;
-z-index:2;
 min-height:100vh;
 }
+
 .active{
 display:block;
-animation:fadeIn 1.5s ease;
+animation:fadeIn 1s ease;
 }
+
 @keyframes fadeIn{
 from{opacity:0; transform:translateY(20px);}
 to{opacity:1; transform:translateY(0);}
+}
+
+h1{
+font-size:40px;
+letter-spacing:2px;
 }
 
 button{
@@ -52,182 +43,138 @@ padding:15px 35px;
 font-size:18px;
 border:none;
 border-radius:40px;
-background:#ff4d6d;
+background:linear-gradient(45deg,#ff004c,#ff4d6d);
 color:white;
 cursor:pointer;
-margin-top:20px;
-transition:0.4s;
-box-shadow:0 0 15px rgba(255,77,109,0.6);
+margin:15px;
+transition:0.3s;
+box-shadow:0 0 15px rgba(255,0,76,0.6);
 }
+
 button:hover{
 transform:scale(1.1);
-box-shadow:0 0 25px rgba(255,77,109,1);
+box-shadow:0 0 25px rgba(255,0,76,1);
 }
 
 #message{
 font-size:20px;
 margin-top:30px;
 white-space:pre-line;
-line-height:2;
-max-width:750px;
+line-height:2.2;
+max-width:900px;
 margin:auto;
-}
-
-/* قلوب */
-.heart{
-position:fixed;
-color:#ff99aa;
-font-size:20px;
-animation:float 6s linear infinite;
-z-index:1;
-}
-@keyframes float{
-0%{transform:translateY(100vh); opacity:1;}
-100%{transform:translateY(-10vh); opacity:0;}
-}
-
-/* السنورين */
-.cats{
-position:fixed;
-bottom:10px;
-left:50%;
-transform:translateX(-50%);
-font-size:40px;
-z-index:3;
-opacity:0.9;
+background:rgba(0,0,0,0.4);
+padding:30px;
+border-radius:20px;
+box-shadow:0 0 30px rgba(255,0,76,0.4);
 }
 </style>
 </head>
 <body>
 
-<!-- السنورين -->
-<div class="cats">🐈‍⬛🖤🐈</div>
-
-<!-- الصفحة 1 -->
-<div class="page active" id="page1">
-<h1>Welcome Muthii 22 🖤</h1>
-<p>في شي بسيط… لكنه من اعماق قلبي ✨</p>
-<button onclick="nextPage(2)">انطلق</button>
+<div class="page active" id="start">
+<h1>muthii 22 🖤</h1>
+<p>جاهزة للاختبار؟ 😏</p>
+<button onclick="nextPage('q1')">ابدأ</button>
 </div>
 
-<!-- السؤال 1 -->
-<div class="page" id="page2">
-<h2>مين أكثر شخص يحبك؟ 😌</h2>
-<button onclick="nextPage(3)">أنا 🖤</button>
-<button onclick="nextPage(3)">أنا بدون نقاش</button>
-<button onclick="nextPage(3)">أكيد أنا 😎</button>
+<div class="page" id="q1">
+<h2>السؤال 1</h2>
+<p>أنا أحبك أكثر من أي شي في الدنيا؟</p>
+<button onclick="answer(true, 'q2')">صح</button>
+<button onclick="answer(false)">غلط</button>
 </div>
 
-<!-- السؤال 2 -->
-<div class="page" id="page3">
-<h2>لو اختاروا لك هدية… ايش تختاري؟ 🎁</h2>
-<button onclick="nextPage(4)">ورد 🌹</button>
-<button onclick="nextPage(4)">سفر ✈️</button>
-<button onclick="nextPage(4)">أنا 😌🖤</button>
+<div class="page" id="q2">
+<h2>السؤال 2</h2>
+<p>أنتي أهم شخص في حياتي؟</p>
+<button onclick="answer(true, 'q3')">صح</button>
+<button onclick="answer(false)">غلط</button>
 </div>
 
-<!-- السؤال 3 -->
-<div class="page" id="page4">
-<h2>تتوقعي ايش ينتظرك الحين؟ ✨</h2>
-<button onclick="nextPage(5)">شي بسيط</button>
-<button onclick="nextPage(5)">مفاجأة</button>
-<button onclick="nextPage(5)">كلام من القلب 🖤</button>
+<div class="page" id="q3">
+<h2>السؤال 3</h2>
+<p>مستحيل أخليك تفلتين مني؟ 😏</p>
+<button onclick="answer(true, 'success')">صح</button>
+<button onclick="answer(false)">غلط</button>
 </div>
 
-<!-- زر النهاية -->
-<div class="page" id="page5">
-<button onclick="showFinal()">🎂 Happy Birthday 🎂</button>
+<div class="page" id="success">
+<h2>كلهم صح 🔥</h2>
+<button onclick="nextPage('challenge')">نروح للتحدي</button>
 </div>
 
-<!-- الصفحة النهائية -->
+<div class="page" id="challenge">
+<h2>التحدي 😈</h2>
+<p>
+في المكان الي نحن فيه الحين أنا مخبي ورقه…  
+ولازم تحصليها 👀
+</p>
+<button onclick="nextPage('big')">نعم حصلتها 🖤</button>
+</div>
+
+<div class="page" id="big">
+<h2>جاهزة للشي الكبير؟ 😌🔥</h2>
+<button onclick="showFinal()">أكيد</button>
+</div>
+
 <div class="page" id="final">
-<h1>🎉 Muthii 22 🎉</h1>
+<h1>muthii 22 🖤</h1>
 <div id="message"></div>
 </div>
 
 <script>
-function nextPage(num){
+function nextPage(id){
 document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-document.getElementById('page'+num).classList.add('active');
+document.getElementById(id).classList.add('active');
 window.scrollTo(0,0);
 }
 
-function showFinal(){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-document.getElementById('final').classList.add('active');
-window.scrollTo(0,0);
-typeWriter();
-createHearts();
+function answer(correct, next){
+if(correct){
+nextPage(next);
+}else{
+alert("غلط 😏 جربي مرة ثانية");
+}
 }
 
-/* النص */
-let text = `كل عام وانتي بخير وبصحه وسلامه والعمر كله 🤍
+let text = `كل عام 
+وانتي بخير وبصحه وسلامه والعمر كله.
 
-اكملتي ٢٢ عام من عمرش...
-لكن لو بتسألي عمري كم؟
-بقولش: من لما حبيتش 🖤
+اكملتي ٢٢ عام من عمرش لكن لو بتسألي عمري كم بقولش من لما حبيتش.
 
 كل سنه وانتي احلا سنين يا زهره مارس،
-وأنتي الزهره الي تحلي البستان وتعطيه الجمال 🌹
+وأنتي الزهره الي تحلي البستان وتعطيه الجمال.
 
-اتمنى لش سنه جميله ومليئه بالافراح،
-وصدقيني من جانبي راح اخليها احلا واحلا من كل السنين...
+اتمنى لش سنه جميله ومليئه بالافراح
+وصدقيني من جانبي راح اخليها احلا واحلا من كل السنين..
 
-العمر كله يارب ونكبر مع بعض،
-ونعيش احلا ايامنا واحتفل بكل سنينش ان شاء الله ✨
+العمر كله يارب ونكبر مع بعض ونعيش احلا ايامنا
+واحتفل بكل سنينش ان شاء الله.
 
-احتفظي بهالشي البسيط،
-يمكن يوم من الايام بتجلسي تشوفيه وتفرحي،
-وتعرفي في انسان يحبش ويحاول يستغل مواهبه وجهده وعمله لصالحش 🤍
+احتفظي بهالشي البسيط
+يمكن يوم من الايام بتجلسي تشوفيه وتفرحي
+وتعرفي في انسان يحبش ويحاول يستغل مواهبه وجهده وعمله لصالحش.
 
-كل عام وانتي بخير وبصحه وسلامه ياعمري،
-والعمر كله يارب يا سنيني🖤
-  كل عام وانتي بخير وبصحه وسلامه ياعمري،
-والعمر كله يارب يا سنيني 🖤
+كل عام وانتي بخير وبصحه وسلامه ياعمري
+والعمر كله يارب ياسنيني 🖤
 
-وإذا عطيتيني عكس الكف…
-بتحصلي هديتش الحين 🖤
+واذا تريدي هديتش عطيني عكس الكف 😏🖤
 `;
 
-
 let i=0;
+function showFinal(){
+nextPage('final');
+typeWriter();
+}
+
 function typeWriter(){
 if(i<text.length){
 document.getElementById("message").innerHTML+=text.charAt(i);
 i++;
-setTimeout(typeWriter,40);
+setTimeout(typeWriter,35);
 }
 }
-
-/* نجوم */
-for(let i=0;i<60;i++){
-let star=document.createElement("div");
-star.classList.add("star");
-star.style.width=Math.random()*3+"px";
-star.style.height=star.style.width;
-star.style.top=Math.random()*100+"vh";
-star.style.left=Math.random()*100+"vw";
-star.style.animationDuration=(Math.random()*3+2)+"s";
-document.body.appendChild(star);
-}
-
-/* قلوب */
-function createHearts(){
-setInterval(()=>{
-let heart=document.createElement("div");
-heart.classList.add("heart");
-heart.innerHTML="🖤";
-heart.style.left=Math.random()*100+"vw";
-heart.style.fontSize=(Math.random()*20+15)+"px";
-heart.style.animationDuration=(Math.random()*3+4)+"s";
-document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),7000);
-},500);
-}
-</script>
-
-</body>
-</html>
 </script>
 
 </body>
